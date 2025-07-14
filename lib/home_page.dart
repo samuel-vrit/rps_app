@@ -1,8 +1,24 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final List images = [
+    'assets/images/Paper.png',
+    'assets/images/rock.png',
+    'assets/images/seasor.png',
+  ];
+
+  int playerOneNumber = 0;
+  int playerTwoNumber = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -16,53 +32,24 @@ class HomePage extends StatelessWidget {
           ),
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(
-              child: MaterialButton(
-                padding: EdgeInsets.zero,
-                splashColor: Colors.purpleAccent.withValues(alpha: 0.1),
-                focusColor: Colors.red,
-                onPressed: () {},
-                child: RotatedBox(
-                  quarterTurns: 2,
-                  child: Image.asset(
-                    'assets/images/Paper.png',
-                    // scale: 0.1,
-                  ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  playerOneNumber = Random().nextInt(3);
+                });
+              },
+              child: RotatedBox(
+                quarterTurns: 2,
+                child: Image.asset(
+                  images[playerOneNumber],
+                  // scale: 0.1,
                 ),
               ),
             ),
-            Text(
-              'Rock',
-              style: GoogleFonts.anton(
-                color: Color(0XFFFF58E8),
-                fontSize: 60,
-                height: 1,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-            Text(
-              'Paper',
-              style: GoogleFonts.anton(
-                color: Color(0XFFFF58E8),
-                fontSize: 40,
-                height: 1,
-                fontWeight: FontWeight.w800,
-              ),
-            ),
-            Text(
-              'Scissor',
-              style: GoogleFonts.anton(
-                color: Color(0XFFFF58E8),
-                fontSize: 30,
-                height: 1,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            Expanded(
-              child: Image.asset('assets/images/Paper.png'),
-            )
+            Divider(),
+            Image.asset('assets/images/Paper.png')
           ],
         ),
       ),
